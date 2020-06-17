@@ -56,6 +56,7 @@ namespace Bluetooth {
                 , _payloadSize(_bufferSize - _headerSize)
                 , _payload(_buffer + _headerSize)
                 , _dataSize(0)
+                , _offset(0)
             {
                 ASSERT(_buffer != nullptr);
                 ASSERT(_header != nullptr);
@@ -74,7 +75,7 @@ namespace Bluetooth {
             }
 
         public:
-            uint32_t  Ingest(const Producer& producer)
+            uint32_t Ingest(const Producer& producer)
             {
                 uint32_t consumed = 0;
                 _dataSize += producer((_payload + _dataSize), (_payloadSize - _dataSize), consumed);
